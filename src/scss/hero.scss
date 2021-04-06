@@ -1,0 +1,45 @@
+
+.hero {
+    height: 90vh;
+    min-height: 500px;
+    margin-bottom: 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    // color: #212529;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+
+    .homepage & {
+        margin-bottom: 0;
+        height: 85vh;
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(#000, 0.5);
+    }
+
+    &-container {
+        position: relative;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 3.8rem;
+    }
+
+    a:not(.btn) {
+        color: #fff;
+    }
+}

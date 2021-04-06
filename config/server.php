@@ -1,5 +1,9 @@
 <?php
-session_start();
+
+error_reporting(-1);
+ini_set('display_errors', 'On');
+set_error_handler("var_dump");
+
 
 // initializing variables
 $fullname = "";
@@ -11,6 +15,8 @@ $db = mysqli_connect('localhost', 'root', 'root', 'cms-local');
 
 // REGISTER USER
 if (isset($_POST['sign_me_up'])) {
+    session_start();
+
     // receive all input values from the form
     $fullname = mysqli_real_escape_string($db, $_POST['fullname']);
     $email = mysqli_real_escape_string($db, $_POST['email']);
@@ -56,8 +62,10 @@ if (isset($_POST['sign_me_up'])) {
 
         $query = "INSERT INTO users (fullname, email, password) VALUES('$fullname', '$email', '$password')";
         mysqli_query($db, $query);
-        $_SESSION['fullname'] = $fullname;
+        $_SESSION['email'] = $email;
         $_SESSION['success'] = "You are now logged in";
+
+        include('mailer/email-template.php');
         header('location: index.php');
     }
 }
@@ -65,6 +73,8 @@ if (isset($_POST['sign_me_up'])) {
 
 // SIGN USER IN
 if (isset($_POST['log_me_in'])) {
+    session_start();
+
     $email = mysqli_real_escape_string($db, $_POST['email']);
     $password = mysqli_real_escape_string($db, $_POST['password']);
 
@@ -81,6 +91,7 @@ if (isset($_POST['log_me_in'])) {
         $results = mysqli_query($db, $query);
         if (mysqli_num_rows($results) == 1) {
             $_SESSION['email'] = $email;
+            $_SESSION['fullname'] = $fullname;
             $_SESSION['success'] = "You are now logged in";
             header('location: index.php');
         } else {

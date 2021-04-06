@@ -1,4 +1,4 @@
-<?php include('components/server.php') ?>
+<?php include('config/server.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +24,7 @@
                         <?php include('components/errors.php'); ?>
                         <div class="form-group mb-3">
                             <label class="mb-1" for="fullname">Full name*</label>
-                            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Eg: John Doe" value="<?php echo $fullname; ?> required">
+                            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Eg: John Doe" value="<?php echo $fullname; ?>" required>
                         </div>
                         <div class="form-group mb-3">
                             <label class="mb-1" for="email">Email address*</label>
@@ -62,8 +62,6 @@
     </main>
 
     <?php include('components/footer.php') ?>
-
-    <script src="./dist/main.bundle.js"></script>
 </body>
 
 </html>

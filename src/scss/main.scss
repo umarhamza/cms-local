@@ -1,13 +1,32 @@
 @import "./bootstrap";   
 @import "./header";   
+@import "./hero";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "./carousel";
 @import "./loader";   
 
 html, body {
     height: 100%;
 }
 
+body {
+    font-family: sans-serif;
+
+    &.homepage {
+        height: 100vh;
+
+        #main {
+            min-height: auto;
+        }
+    }
+}
+
 #main {
     min-height: 100%;
+}
+
+.location-page {
+    background-color: #ebe9e9;
 }
 
 #sign-up-form {

@@ -1,0 +1,21 @@
+#carousel {
+    margin-bottom: 40px;
+
+    .glide__slide {
+        img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+    
+        figcaption {
+            font-size: 20px;
+            text-align: center;
+            color: #000518;
+        }
+    }
+
+    .glide__arrows {
+        text-align: center;
+    }
+}

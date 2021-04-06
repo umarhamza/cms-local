@@ -1,8 +1,13 @@
-import $ from './jquery';
+import $ from './plugins/jquery';
+import Locations from './locations';
+import SmoothScroll from './smooth-scroll';
 
 (($) => {
-  const $body = $('body');
-  const $nav = $body.find('nav');
-})($);
+  const $locationPage = $('body.location-page');
 
- 
+  if ($locationPage && $locationPage.length > 0) {
+    Locations.init($);
+  }
+
+  SmoothScroll.init($);
+})($);

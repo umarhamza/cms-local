@@ -1,4 +1,4 @@
-<?php include('components/server.php') ?>
+<?php include('config/server.php') ?>
 
 <!DOCTYPE html>
 <html lang="en">
