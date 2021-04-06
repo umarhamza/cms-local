@@ -32,7 +32,6 @@
   },
   "dependencies": {
     "@glidejs/glide": "^3.4.1",
-    "axios": "^0.21.1",
-    "jquery-validation": "^1.19.3"
+    "axios": "^0.21.1"
   }
 }

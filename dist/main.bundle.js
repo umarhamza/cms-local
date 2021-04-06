@@ -316,6 +316,17 @@ eval("\n\nvar bind = __webpack_require__(/*! ./helpers/bind */ \"./node_modules/
 
 /***/ }),
 
+/***/ "./src/js/forms.js":
+/*!*************************!*\
+  !*** ./src/js/forms.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar Forms = {\n  init: function init($) {\n    var forms = document.querySelectorAll('.needs-validation'); // Loop over them and prevent submission\n\n    Array.prototype.slice.call(forms).forEach(function (form) {\n      form.addEventListener('submit', function (event) {\n        if (!form.checkValidity()) {\n          event.preventDefault();\n          event.stopPropagation();\n        }\n\n        if (form.id === 'sign-up-form') {\n          var $passwordError = $(form).find('.invalid-password');\n          var pw1 = form.querySelector('#password_1').value;\n          var pw2 = form.querySelector('#password_2').value;\n\n          if (pw1 !== pw2) {\n            $passwordError.removeClass('d-none').parent().attr({\n              valid: 'false',\n              invalid: 'true'\n            }).addClass('is-invalid').removeClass('is-valid');\n            event.preventDefault();\n            event.stopPropagation();\n          } else {\n            $passwordError.addClass('d-none').parent().attr({\n              valid: 'true',\n              invalid: 'false'\n            }).addClass('is-valid').removeClass('is-invalid');\n          }\n        }\n\n        form.classList.add('was-validated');\n      }, false);\n    });\n  }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Forms);\n\n//# sourceURL=webpack://cms-local/./src/js/forms.js?");
+
+/***/ }),
+
 /***/ "./src/js/index.js":
 /*!*************************!*\
   !*** ./src/js/index.js ***!
@@ -345,7 +356,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _plugins_jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/jquery */ \"./src/js/plugins/jquery.js\");\n/* harmony import */ var _plugins_jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_plugins_jquery__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _locations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./locations */ \"./src/js/locations.js\");\n/* harmony import */ var _smooth_scroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./smooth-scroll */ \"./src/js/smooth-scroll.js\");\n\n\n\n\n(function ($) {\n  var $locationPage = $('body.location-page');\n\n  if ($locationPage && $locationPage.length > 0) {\n    _locations__WEBPACK_IMPORTED_MODULE_1__.default.init($);\n  }\n\n  _smooth_scroll__WEBPACK_IMPORTED_MODULE_2__.default.init($);\n})((_plugins_jquery__WEBPACK_IMPORTED_MODULE_0___default()));\n\n//# sourceURL=webpack://cms-local/./src/js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _plugins_jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/jquery */ \"./src/js/plugins/jquery.js\");\n/* harmony import */ var _plugins_jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_plugins_jquery__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _locations__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./locations */ \"./src/js/locations.js\");\n/* harmony import */ var _forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./forms */ \"./src/js/forms.js\");\n/* harmony import */ var _smooth_scroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./smooth-scroll */ \"./src/js/smooth-scroll.js\");\n\n\n\n\n\n(function ($) {\n  var $locationPage = $('body.location-page');\n  var $forms = $('form');\n\n  if ($locationPage && $locationPage.length > 0) {\n    _locations__WEBPACK_IMPORTED_MODULE_1__.default.init($);\n  }\n\n  if ($forms.length > 0) {\n    _forms__WEBPACK_IMPORTED_MODULE_2__.default.init($);\n  }\n\n  _smooth_scroll__WEBPACK_IMPORTED_MODULE_3__.default.init($);\n})((_plugins_jquery__WEBPACK_IMPORTED_MODULE_0___default()));\n\n//# sourceURL=webpack://cms-local/./src/js/main.js?");
 
 /***/ }),
 

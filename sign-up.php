@@ -20,7 +20,7 @@
                 </div>
                 <div class="col col-12 col-md-6 d-flex flex-column justify-content-center">
                     <h2 class="mb-4">Create an account</h2>
-                    <form id="sign-up-form" method="post" action="sign-up.php">
+                    <form id="sign-up-form" class="needs-validation" method="post" action="sign-up.php" novalidate>
                         <?php include('components/errors.php'); ?>
                         <div class="form-group mb-3">
                             <label class="mb-1" for="fullname">Full name*</label>
@@ -33,11 +33,14 @@
                         </div>
                         <div class="form-group mb-3">
                             <label class="mb-1" for="password_1">Password*</label>
-                            <input type="password" class="form-control" id="password_1" name="password_1" placeholder="*******" required>
+                            <input type="password" class="form-control" id="password_1" name="password_1" placeholder="*******" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
+                            <div class="invalid-feedback">Password must have a minimum eight characters, at least one letter and one number</div>
                         </div>
                         <div class="form-group mb-3">
                             <label class="mb-1" for="password_2">Confirm password*</label>
-                            <input type="password" class="form-control" id="password_2" name="password_2" placeholder="*******" required>
+                            <input type="password" class="form-control" id="password_2" name="password_2" placeholder="*******" required pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$">
+                            <div class="invalid-feedback">Password must have a minimum eight characters, at least one letter and one number</div>
+                            <div class="invalid-password d-none" style="margin-top: 0.25rem;font-size: 0.875em;color: #dc3545;">Passwords do not match!</div>
                         </div>
                         <div class="form-check mb-3">
                             <input type="checkbox" class="form-check-input" id="teesNcees" required>
@@ -45,12 +48,6 @@
                         </div>
                         <div class="form-group position-relative mb-3">
                             <button type="submit" id="sign-me-up" name="sign_me_up" class="btn btn-primary">Sign up</button>
-                            <div class="lds-ring spinner d-none">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
                         </div>
                         <p>
                             Already a member? <a href="sign-in.php">Sign in</a>
@@ -61,7 +58,7 @@
         </div>
     </main>
 
-    <?php include('components/footer.php') ?>
+    <?php include('components/footer.php'); ?>
 </body>
 
 </html>

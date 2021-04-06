@@ -19,15 +19,18 @@
                 </div>
                 <div class="col col-12 col-md-6 d-flex flex-column justify-content-center">
                     <h2 class="mb-4">Sign In</h2>
-                    <form id="sign-in-form" method="post" action="sign-in.php">
+                    <form id="sign-in-form" class="needs-validation" method="post" action="sign-in.php" novalidate>
                         <?php include('components/errors.php'); ?>
+                        <div class="form-error"></div>
                         <div class="form-group mb-3">
                             <label class="mb-1" for="email">Email address*</label>
                             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="name@example.com" required>
+                            <div class="invalid-feedback">Please enter valid email address</div>
                         </div>
                         <div class="form-group mb-3">
                             <label class="mb-1" for="password">Password*</label>
                             <input type="password" class="form-control" id="password" name="password" placeholder="*******" required>
+                            <div class="invalid-feedback">Please enter valid password</div>
                         </div>
                         <div class="form-group position-relative mb-3">
                             <button type="submit" id="log-me-in" name="log_me_in" class="btn btn-primary">Sign in</button>
