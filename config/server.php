@@ -1,4 +1,13 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
 // initializing variables
 $fullname = "";
@@ -17,8 +26,6 @@ if (isset($_POST['sign_me_up'])) {
     $email = mysqli_real_escape_string($db, $_POST['email']);
     $password_1 = mysqli_real_escape_string($db, $_POST['password_1']);
     $password_2 = mysqli_real_escape_string($db, $_POST['password_2']);
-
-    echo $fullname;
 
     // form validation: ensure that the form is correctly filled ...
     // by adding (array_push()) corresponding error unto $errors array
@@ -53,6 +60,50 @@ if (isset($_POST['sign_me_up'])) {
 
     // Finally, register user if there are no errors in the form
     if (count($errors) == 0) {
+        //Load Composer's autoloader
+        require './vendor/autoload.php';
+
+        //Instantiation and passing `true` enables exceptions
+        $mail = new PHPMailer(true);
+
+        try {
+            // SMTP debugger
+            // $mail->SMTPDebug = 1;
+
+            //Send using SMTP
+            $mail->isSMTP();
+
+            //Set the SMTP server to send through
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = '';
+            $mail->Password   = '';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+
+            //Recipients
+            $mail->setFrom('umar@umarhamza.com', 'Umar Hamza');
+            $mail->addAddress($email, $fullname);
+            $mail->addBCC('umar@umarhamza.com');
+
+
+            $body = '<p style="background:#212529;padding:25px 15px;color:#fff;text-align:center;font-size:28px;">CMS LOCAL</p>
+            <h1 style="text-align:center;font-size:20px;margin-top: 75px;">THANK YOU FOR SIGNING UP</h1>
+            <b style="height:120px;display:block;text-align:center;">Thanks you for signing up to CMS Local. You can login at anytime from <a href="' . $_SERVER["SERVER_NAME"] . '" target="_blank">' . $_SERVER["SERVER_NAME"] . '</a></b>
+            <p style="background:#000;padding:15px;color:#ccc;text-align:center;">Copyright 2021 CMS Local</p>';
+
+            //Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Thank your for signing up';
+            $mail->Body    = $body;
+            $mail->AltBody = strip_tags($body);
+
+            $mail->send();
+            echo 'Message has been sent';
+        } catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
         $password = md5($password_1); //encrypt the password before saving in the database
 
         $query = "INSERT INTO users (fullname, email, password) VALUES('$fullname', '$email', '$password')";
@@ -60,7 +111,6 @@ if (isset($_POST['sign_me_up'])) {
         $_SESSION['email'] = $email;
         $_SESSION['success'] = "You are now logged in";
 
-        include('mailer/email-template.php');
         header('location: index.php');
     }
 }
@@ -94,5 +144,3 @@ if (isset($_POST['log_me_in'])) {
         }
     }
 }
-
-?>
